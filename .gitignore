@@ -1,0 +1,37 @@
+*.log
+**/dist
+
+# IDE
+.vscode
+
+# Node
+**/node_modules
+/packages/*/*.tgz
+
+# Testing
+**/coverage
+
+# Site
+/site/_site
+/site/react/core/*
+!/site/react/core/overrides
+/site/react/grid/*
+!/site/react/grid/overrides
+/site/react/chart/*
+!/site/react/chart/overrides
+/site/react/scheduler/*
+!/site/react/scheduler/overrides
+/site/react/common/*
+!/site/react/common/overrides
+/site/vue/grid/*
+!/site/vue/grid/overrides
+
+# Demos
+/packages/*/src/demo-registry.js
+/packages/*/src/*-demo-registry.js
+/packages/*/src/**/*.g*
+
+# Typescript
+/packages/*/.rpt2_cache
+/packages/*/api/json/*
+/packages/*/api/temp/*

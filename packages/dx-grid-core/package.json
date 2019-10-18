@@ -1,0 +1,58 @@
+{
+  "name": "@devexpress/dx-grid-core",
+  "version": "2.1.2",
+  "description": "Core library for the DevExtreme Reactive Grid component",
+  "author": {
+    "name": "Developer Express Inc.",
+    "url": "https://www.devexpress.com/"
+  },
+  "bugs": {
+    "url": "https://github.com/DevExpress/devextreme-reactive/issues"
+  },
+  "homepage": "https://devexpress.github.io/devextreme-reactive/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevExpress/devextreme-reactive.git"
+  },
+  "keywords": [
+    "data",
+    "grid",
+    "table"
+  ],
+  "license": "SEE LICENSE IN README.md",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/dx-grid-core.umd.js",
+  "module": "dist/dx-grid-core.es.js",
+  "types": "dist/dx-grid-core.d.ts",
+  "globalName": "DevExpress.DXGridCore",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "build": "rollup -c rollup.config.js",
+    "build:watch": "rollup -c rollup.config.js -w",
+    "lint": "tslint -p tsconfig.lint.json",
+    "lint:fix": "yarn lint -- --fix"
+  },
+  "devDependencies": {
+    "@devexpress/dx-core": "2.1.2",
+    "core-js": "^3.3.2",
+    "jest": "^24.9.0",
+    "rollup": "^1.24.0",
+    "rollup-plugin-license": "^0.12.1",
+    "rollup-plugin-typescript2": "^0.24.3",
+    "seamless-immutable": "^7.1.4",
+    "tslint": "^5.20.0",
+    "tslint-config-airbnb": "^5.11.2",
+    "typescript": "3.6.4",
+    "typescript-tslint-plugin": "^0.5.4"
+  },
+  "peerDependencies": {
+    "@devexpress/dx-core": "2.1.2"
+  }
+}

@@ -1,0 +1,56 @@
+import * as React from 'react';<%&additionalImports%>
+import {
+  ArgumentAxis,
+  ValueAxis,
+  Chart,
+  Legend,
+  LineSeries,
+  AreaSeries,
+  SplineSeries,
+  Title,
+} from '@devexpress/dx-react-chart-<%&themeName%>';
+
+import { born as data } from '../../../demo-data/data-vizualization';
+
+export default class Demo extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data,
+    };
+  }
+
+  render() {
+    const { data: chartData } = this.state;
+
+    return (
+      <<%&wrapperTag%><%&wrapperAttributes%>>
+        <Chart
+          data={chartData}
+        >
+          <Title text="Born amount" />
+          <Legend placeholder="right" />
+          <ArgumentAxis position="top" />
+          <ValueAxis />
+
+          <LineSeries
+            name="Russia"
+            valueField="ru"
+            argumentField="year"
+          />
+          <SplineSeries
+            name="China"
+            valueField="ch"
+            argumentField="year"
+          />
+          <AreaSeries
+            name="USA"
+            valueField="us"
+            argumentField="year"
+          />
+        </Chart>
+      </<%&wrapperTag%>>
+    );
+  }
+}

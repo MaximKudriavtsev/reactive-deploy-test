@@ -1,0 +1,49 @@
+import React, { useState } from 'react';<%&additionalImports%>
+import {
+  SelectionState,
+  IntegratedSelection,
+} from '@devexpress/dx-react-grid';
+import {
+  Grid,
+  VirtualTable,
+  TableHeaderRow,
+  TableSelection,
+} from '@devexpress/dx-react-grid-<%&themeName%>';
+
+import { generateRows } from '../../../demo-data/generator';
+
+export default () => {
+  const [columns] = useState([
+    { name: 'name', title: 'Name' },
+    { name: 'gender', title: 'Gender' },
+    { name: 'city', title: 'City' },
+    { name: 'car', title: 'Car' },
+  ]);
+  const [rows] = useState(generateRows({ length: 1000 }));
+  const [selection, setSelection] = useState([]);
+
+  return (
+    <div>
+      <span>
+        Total rows selected:
+        {' '}
+        {selection.length}
+      </span>
+      <<%&wrapperTag%><%&wrapperAttributes%>>
+        <Grid
+          rows={rows}
+          columns={columns}
+        >
+          <SelectionState
+            selection={selection}
+            onSelectionChange={setSelection}
+          />
+          <IntegratedSelection />
+          <VirtualTable />
+          <TableHeaderRow />
+          <TableSelection showSelectAll />
+        </Grid>
+      </<%&wrapperTag%>>
+    </div>
+  );
+};

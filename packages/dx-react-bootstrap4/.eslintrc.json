@@ -1,0 +1,10 @@
+{
+  "extends": "../../.eslintrc.react.json",
+  "rules": {
+      "jsx-a11y/no-static-element-interactions": "off",
+      "filenames/match-regex": [2, "^[a-z-\\.]+$"]
+  },
+  "env": {
+    "jest/globals": true
+  }
+}

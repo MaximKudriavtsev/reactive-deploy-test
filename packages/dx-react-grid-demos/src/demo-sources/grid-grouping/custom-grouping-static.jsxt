@@ -1,0 +1,61 @@
+import React, { useState } from 'react';<%&additionalImports%>
+import {
+  GroupingState,
+  CustomGrouping,
+} from '@devexpress/dx-react-grid';
+import {
+  Grid,
+  Table,
+  TableHeaderRow,
+  TableGroupRow,
+} from '@devexpress/dx-react-grid-<%&themeName%>';
+
+import {
+  generateRows,
+  defaultColumnValues,
+} from '../../../demo-data/generator';
+
+const getChildGroups = groups => groups
+  .map(group => ({ key: group.key, childRows: group.items }));
+
+export default () => {
+  const [columns] = useState([
+    { name: 'name', title: 'Name' },
+    { name: 'gender', title: 'Gender' },
+    { name: 'city', title: 'City' },
+    { name: 'car', title: 'Car' },
+  ]);
+  const [data] = useState([{
+    key: 'Male',
+    items: generateRows({
+      columnValues: { ...defaultColumnValues, gender: ['Male'] },
+      length: 5,
+    }),
+  }, {
+    key: 'Female',
+    items: generateRows({
+      columnValues: { ...defaultColumnValues, gender: ['Female'] },
+      length: 5,
+    }),
+  }]);
+  const [grouping] = useState([{ columnName: 'gender' }]);
+
+  return (
+    <<%&wrapperTag%><%&wrapperAttributes%>>
+      <Grid
+        rows={data}
+        columns={columns}
+      >
+        <GroupingState
+          grouping={grouping}
+        />
+        <CustomGrouping
+          getChildGroups={getChildGroups}
+        />
+        <Table />
+        <TableHeaderRow />
+        <TableGroupRow />
+      </Grid>
+    </<%&wrapperTag%>>
+  );
+};

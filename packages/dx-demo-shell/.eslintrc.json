@@ -1,0 +1,10 @@
+{
+    "extends": "../../.eslintrc.react.json",
+    "env": {
+      "browser": true
+    },
+    "rules": {
+        "filenames/match-regex": [2, "^[a-z-\\.]+$"],
+        "no-restricted-imports": ["error", "@material-ui/core", "@material-ui/icons"]
+    }
+}

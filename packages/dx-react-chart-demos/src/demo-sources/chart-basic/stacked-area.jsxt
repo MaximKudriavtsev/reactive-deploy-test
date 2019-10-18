@@ -1,0 +1,59 @@
+import * as React from 'react';<%&additionalImports%>
+import {
+  Chart,
+  ArgumentAxis,
+  ValueAxis,
+  AreaSeries,
+} from '@devexpress/dx-react-chart-<%&themeName%>';
+import { ArgumentScale, Stack } from '@devexpress/dx-react-chart';
+import { scalePoint } from 'd3-scale';
+
+import { ageStructure } from '../../../demo-data/data-vizualization';
+
+export default class Demo extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: ageStructure,
+    };
+  }
+
+  render() {
+    const { data: chartData } = this.state;
+
+    return (
+      <<%&wrapperTag%><%&wrapperAttributes%>>
+        <Chart
+          data={chartData}
+          style={{ paddingRight: '20px' }}
+        >
+          <ArgumentScale factory={scalePoint} />
+          <ArgumentAxis />
+          <ValueAxis />
+
+          <AreaSeries
+            name="Young"
+            valueField="young"
+            argumentField="state"
+          />
+          <AreaSeries
+            name="Middle"
+            valueField="middle"
+            argumentField="state"
+          />
+          <AreaSeries
+            name="Older"
+            valueField="older"
+            argumentField="state"
+          />
+          <Stack
+            stacks={[
+              { series: ['Young', 'Middle', 'Older'] },
+            ]}
+          />
+        </Chart>
+      </<%&wrapperTag%>>
+    );
+  }
+}

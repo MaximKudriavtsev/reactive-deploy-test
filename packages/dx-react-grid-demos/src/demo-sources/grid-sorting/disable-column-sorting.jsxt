@@ -1,0 +1,45 @@
+import React, { useState } from 'react';<%&additionalImports%>
+import {
+  SortingState,
+  IntegratedSorting,
+} from '@devexpress/dx-react-grid';
+import {
+  Grid,
+  Table,
+  TableHeaderRow,
+} from '@devexpress/dx-react-grid-<%&themeName%>';
+
+import { generateRows } from '../../../demo-data/generator';
+
+export default () => {
+  const [columns] = useState([
+    { name: 'name', title: 'Name' },
+    { name: 'gender', title: 'Gender' },
+    { name: 'city', title: 'City' },
+    { name: 'car', title: 'Car' },
+  ]);
+  const [rows] = useState(generateRows({ length: 8 }));
+  const [defaultSorting] = useState([
+    { columnName: 'gender', direction: 'desc' },
+  ]);
+  const [sortingStateColumnExtensions] = useState([
+    { columnName: 'gender', sortingEnabled: false },
+  ]);
+
+  return (
+    <<%&wrapperTag%><%&wrapperAttributes%>>
+      <Grid
+        rows={rows}
+        columns={columns}
+      >
+        <SortingState
+          defaultSorting={defaultSorting}
+          columnExtensions={sortingStateColumnExtensions}
+        />
+        <IntegratedSorting />
+        <Table />
+        <TableHeaderRow showSortingControls />
+      </Grid>
+    </<%&wrapperTag%>>
+  );
+};

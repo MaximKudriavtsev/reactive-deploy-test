@@ -1,0 +1,44 @@
+import React, { useState } from 'react';<%&additionalImports%>
+import {
+  FilteringState,
+  IntegratedFiltering,
+} from '@devexpress/dx-react-grid';
+import {
+  Grid,
+  Table,
+  TableHeaderRow,
+  TableFilterRow,
+} from '@devexpress/dx-react-grid-<%&themeName%>';
+
+import { generateRows } from '../../../demo-data/generator';
+
+const toLowerCase = value => String(value).toLowerCase();
+const cityPredicate = (value, filter) => toLowerCase(value).startsWith(toLowerCase(filter.value));
+
+export default () => {
+  const [columns] = useState([
+    { name: 'name', title: 'Name' },
+    { name: 'gender', title: 'Gender' },
+    { name: 'city', title: 'City' },
+    { name: 'car', title: 'Car' },
+  ]);
+  const [rows] = useState(generateRows({ length: 8 }));
+  const [integratedFilteringColumnExtensions] = useState([
+    { columnName: 'city', predicate: cityPredicate },
+  ]);
+
+  return (
+    <<%&wrapperTag%><%&wrapperAttributes%>>
+      <Grid
+        rows={rows}
+        columns={columns}
+      >
+        <FilteringState defaultFilters={[{ columnName: 'city', value: 'Paris' }]} />
+        <IntegratedFiltering columnExtensions={integratedFilteringColumnExtensions} />
+        <Table />
+        <TableHeaderRow />
+        <TableFilterRow />
+      </Grid>
+    </<%&wrapperTag%>>
+  );
+};

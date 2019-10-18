@@ -1,0 +1,42 @@
+import React, { useState } from 'react';<%&additionalImports%>
+import { SelectionState } from '@devexpress/dx-react-grid';
+import {
+  Grid,
+  Table,
+  TableHeaderRow,
+  TableSelection,
+} from '@devexpress/dx-react-grid-<%&themeName%>';
+
+import { generateRows } from '../../../demo-data/generator';
+
+export default () => {
+  const [columns] = useState([
+    { name: 'name', title: 'Name' },
+    { name: 'gender', title: 'Gender' },
+    { name: 'city', title: 'City' },
+    { name: 'car', title: 'Car' },
+  ]);
+  const [rows] = useState(generateRows({ length: 6 }));
+  const [selection, setSelection] = useState([1]);
+
+  return (
+    <<%&wrapperTag%><%&wrapperAttributes%>>
+      <Grid
+        rows={rows}
+        columns={columns}
+      >
+        <SelectionState
+          selection={selection}
+          onSelectionChange={setSelection}
+        />
+        <Table />
+        <TableHeaderRow />
+        <TableSelection
+          selectByRowClick
+          highlightRow
+          showSelectionColumn={false}
+        />
+      </Grid>
+    </<%&wrapperTag%>>
+  );
+};

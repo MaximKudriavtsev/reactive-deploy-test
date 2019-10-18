@@ -1,0 +1,45 @@
+import React, { useState } from 'react';<%&additionalImports%>
+import {
+  Grid,
+  Table,
+  TableHeaderRow,
+  ColumnChooser,
+  TableColumnVisibility,
+  Toolbar,
+} from '@devexpress/dx-react-grid-<%&themeName%>';
+
+import { generateRows } from '../../../demo-data/generator';
+
+export default () => {
+  const [columns] = useState([
+    { name: 'name', title: 'Name' },
+    { name: 'gender', title: 'Gender' },
+    { name: 'city', title: 'City' },
+    { name: 'car', title: 'Car' },
+  ]);
+  const [rows] = useState(generateRows({ length: 6 }));
+  const [tableColumnExtensions] = useState([
+    { columnName: 'gender', width: 100 },
+  ]);
+  const [hiddenColumnNames, setHiddenColumnNames] = useState(['gender', 'car']);
+
+  return (
+    <<%&wrapperTag%><%&wrapperAttributes%>>
+      <Grid
+        rows={rows}
+        columns={columns}
+      >
+        <Table
+          columnExtensions={tableColumnExtensions}
+        />
+        <TableHeaderRow />
+        <TableColumnVisibility
+          hiddenColumnNames={hiddenColumnNames}
+          onHiddenColumnNamesChange={setHiddenColumnNames}
+        />
+        <Toolbar />
+        <ColumnChooser />
+      </Grid>
+    </<%&wrapperTag%>>
+  );
+};

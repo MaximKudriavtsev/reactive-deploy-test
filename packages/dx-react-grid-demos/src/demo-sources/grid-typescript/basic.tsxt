@@ -1,0 +1,38 @@
+import * as React from 'react';<%&additionalImports%>
+import { Column } from '@devexpress/dx-react-grid';
+import { Grid, Table, TableHeaderRow } from '@devexpress/dx-react-grid-<%&themeName%>';
+import { generateRows } from '../../../demo-data/generator';
+
+interface IRow {
+  name: string,
+  gender: string,
+  city: string,
+  car: string
+}
+
+const rows: IRow[] = generateRows({ length: 5 });
+const columns: Column[] = [
+  { name: 'name', title: 'Name' },
+  { name: 'gender', title: 'Gender' },
+  { name: 'city', title: 'City' },
+  { name: 'car', title: 'Car' },
+];
+const tableColumnExtensions: Table.ColumnExtension[] = [
+  { columnName: 'gender', width: 100 },
+];
+
+const Demo: React.SFC = () => {
+  return (
+    <<%&wrapperTag%><%&wrapperAttributes%>>
+      <Grid
+        rows={rows}
+        columns={columns}
+      >
+        <Table columnExtensions={tableColumnExtensions} />
+        <TableHeaderRow />
+      </Grid>
+    </<%&wrapperTag%>>
+  );
+}
+
+export default Demo;

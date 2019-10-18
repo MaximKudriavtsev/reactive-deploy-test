@@ -1,0 +1,50 @@
+import React, { useState } from 'react';<%&additionalImports%>
+import { RowDetailState } from '@devexpress/dx-react-grid';
+import {
+  Grid,
+  Table,
+  TableHeaderRow,
+  TableRowDetail,
+} from '@devexpress/dx-react-grid-<%&themeName%>';
+
+import { generateRows } from '../../../demo-data/generator';
+
+const RowDetail = ({ row }) => (
+  <div>
+    Details for
+    {' '}
+    {row.name}
+    {' '}
+    from
+    {' '}
+    {row.city}
+  </div>
+);
+
+export default () => {
+  const [columns] = useState([
+    { name: 'name', title: 'Name' },
+    { name: 'gender', title: 'Gender' },
+    { name: 'city', title: 'City' },
+    { name: 'car', title: 'Car' },
+  ]);
+  const [rows] = useState(generateRows({ length: 8 }));
+
+  return (
+    <<%&wrapperTag%><%&wrapperAttributes%>>
+      <Grid
+        rows={rows}
+        columns={columns}
+      >
+        <RowDetailState
+          defaultExpandedRowIds={[2, 5]}
+        />
+        <Table />
+        <TableHeaderRow />
+        <TableRowDetail
+          contentComponent={RowDetail}
+        />
+      </Grid>
+    </<%&wrapperTag%>>
+  );
+};

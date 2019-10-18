@@ -1,0 +1,72 @@
+import React, { useState, useEffect } from 'react';<%&additionalImports%>
+import { FilteringState } from '@devexpress/dx-react-grid';
+import {
+  Grid,
+  VirtualTable,
+  TableHeaderRow,
+  TableFilterRow,
+} from '@devexpress/dx-react-grid-<%&themeName%>';
+
+import { Loading } from '../../../theme-sources/<%&themeName%>/components/loading';
+
+const URL = 'https://js.devexpress.com/Demos/Mvc/api/DataGridWebApi/Orders';
+
+export default () => {
+  const [columns] = useState([
+    { name: 'ShipCountry', title: 'Country' },
+    { name: 'ShipCity', title: 'City' },
+    { name: 'ShipAddress', title: 'Address' },
+  ]);
+  const [rows, setRows] = useState([]);
+  const [filters, setFilters] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [lastQuery, setLastQuery] = useState();
+
+  const getQueryString = () => {
+    let filter = filters.reduce((acc, { columnName, value }) => {
+      acc.push(`["${columnName}", "contains", "${encodeURIComponent(value)}"]`);
+      return acc;
+    }, []).join(',"and",');
+
+    if (filters.length > 1) {
+      filter = `[${filter}]`;
+    }
+
+    return `${URL}?filter=${filter}`;
+  };
+
+  const loadData = () => {
+    const queryString = getQueryString();
+    if (queryString !== lastQuery && !loading) {
+      setLoading(true);
+      fetch(queryString)
+        .then(response => response.json())
+        .then((orders) => {
+          setRows(orders.data);
+          setLoading(false);
+          setLastQuery(queryString);
+        })
+        .catch(() => setLoading(false));
+      setLastQuery(queryString);
+    }
+  };
+
+  useEffect(() => loadData());
+
+  return (
+    <<%&wrapperTag%><%&wrapperAttributes%> style={{ position: 'relative' }}>
+      <Grid
+        rows={rows}
+        columns={columns}
+      >
+        <FilteringState
+          onFiltersChange={setFilters}
+        />
+        <VirtualTable />
+        <TableHeaderRow />
+        <TableFilterRow />
+      </Grid>
+      {loading && <Loading />}
+    </<%&wrapperTag%>>
+  );
+};

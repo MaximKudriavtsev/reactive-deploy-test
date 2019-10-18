@@ -1,0 +1,8 @@
+{
+  "extends": "../../.eslintrc.react.json",
+  "rules": {
+      "no-undef": "off",
+      "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.*", "**/*.test-utils.*"]}],
+      "filenames/match-regex": [2, "^[a-z-\\.]+$"]
+  }
+}

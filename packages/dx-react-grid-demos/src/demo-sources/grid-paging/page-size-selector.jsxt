@@ -1,0 +1,44 @@
+import React, { useState } from 'react';<%&additionalImports%>
+import {
+  PagingState,
+  IntegratedPaging,
+} from '@devexpress/dx-react-grid';
+import {
+  Grid,
+  Table,
+  TableHeaderRow,
+  PagingPanel,
+} from '@devexpress/dx-react-grid-<%&themeName%>';
+
+import { generateRows } from '../../../demo-data/generator';
+
+export default () => {
+  const [columns] = useState([
+    { name: 'name', title: 'Name' },
+    { name: 'gender', title: 'Gender' },
+    { name: 'city', title: 'City' },
+    { name: 'car', title: 'Car' },
+  ]);
+  const [rows] = useState(generateRows({ length: 60 }));
+  const [pageSizes] = useState([5, 10, 15, 0]);
+
+  return (
+    <<%&wrapperTag%><%&wrapperAttributes%>>
+      <Grid
+        rows={rows}
+        columns={columns}
+      >
+        <PagingState
+          defaultCurrentPage={0}
+          defaultPageSize={5}
+        />
+        <IntegratedPaging />
+        <Table />
+        <TableHeaderRow />
+        <PagingPanel
+          pageSizes={pageSizes}
+        />
+      </Grid>
+    </<%&wrapperTag%>>
+  );
+};

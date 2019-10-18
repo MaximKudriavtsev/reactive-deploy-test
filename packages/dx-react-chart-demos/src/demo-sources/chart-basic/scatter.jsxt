@@ -1,0 +1,38 @@
+import * as React from 'react';<%&additionalImports%>
+import {
+  Chart,
+  ScatterSeries,
+} from '@devexpress/dx-react-chart-<%&themeName%>';
+
+import { dataGenerator } from '../../../demo-data/generator';
+
+export default class Demo extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: dataGenerator(100),
+    };
+  }
+
+  render() {
+    const { data: chartData } = this.state;
+
+    return (
+      <<%&wrapperTag%><%&wrapperAttributes%>>
+        <Chart
+          data={chartData}
+        >
+          <ScatterSeries
+            valueField="val1"
+            argumentField="arg1"
+          />
+          <ScatterSeries
+            valueField="val2"
+            argumentField="arg2"
+          />
+        </Chart>
+      </<%&wrapperTag%>>
+    );
+  }
+}

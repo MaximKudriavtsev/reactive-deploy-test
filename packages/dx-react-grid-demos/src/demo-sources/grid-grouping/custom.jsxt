@@ -1,0 +1,70 @@
+import React, { useState } from 'react';<%&additionalImports%>
+import {
+  GroupingState,
+  IntegratedGrouping,
+} from '@devexpress/dx-react-grid';
+import {
+  Grid,
+  Table,
+  TableHeaderRow,
+  TableGroupRow,
+} from '@devexpress/dx-react-grid-<%&themeName%>';
+
+import { generateRows } from '../../../demo-data/generator';
+
+const GroupCellContent = ({ column, row }) => (
+  <span>
+    Group
+    {' '}
+    <i>
+      {column.title}
+    </i>
+    {' '}
+    by first letter:
+    {' '}
+    <strong>
+      {row.value}
+    </strong>
+  </span>
+);
+
+const cityGroupCriteria = value => ({ key: value.substr(0, 1) });
+
+export default () => {
+  const [columns] = useState([
+    { name: 'name', title: 'Name' },
+    { name: 'gender', title: 'Gender' },
+    { name: 'city', title: 'City' },
+    { name: 'car', title: 'Car' },
+  ]);
+  const [rows] = useState(generateRows({ length: 8 }));
+  const [grouping] = useState([{ columnName: 'city' }]);
+  const [integratedGroupingColumnExtensions] = useState([
+    { columnName: 'city', criteria: cityGroupCriteria },
+  ]);
+  const [tableGroupColumnExtension] = useState([
+    { columnName: 'city', showWhenGrouped: true },
+  ]);
+
+  return (
+    <<%&wrapperTag%><%&wrapperAttributes%>>
+      <Grid
+        rows={rows}
+        columns={columns}
+      >
+        <GroupingState
+          grouping={grouping}
+        />
+        <IntegratedGrouping
+          columnExtensions={integratedGroupingColumnExtensions}
+        />
+        <Table />
+        <TableHeaderRow />
+        <TableGroupRow
+          contentComponent={GroupCellContent}
+          columnExtensions={tableGroupColumnExtension}
+        />
+      </Grid>
+    </<%&wrapperTag%>>
+  );
+};

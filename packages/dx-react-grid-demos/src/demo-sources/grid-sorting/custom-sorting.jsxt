@@ -1,0 +1,67 @@
+import React, { useState } from 'react';<%&additionalImports%>
+import {
+  SortingState,
+  IntegratedSorting,
+} from '@devexpress/dx-react-grid';
+import {
+  Grid,
+  Table,
+  TableHeaderRow,
+} from '@devexpress/dx-react-grid-<%&themeName%>';
+
+import {
+  generateRows,
+  employeeTaskValues,
+} from '../../../demo-data/generator';
+
+const priorityWeights = {
+  Low: 0,
+  Normal: 1,
+  High: 2,
+};
+
+const comparePriority = (a, b) => {
+  const priorityA = priorityWeights[a];
+  const priorityB = priorityWeights[b];
+  if (priorityA === priorityB) {
+    return 0;
+  }
+  return (priorityA < priorityB) ? -1 : 1;
+};
+
+export default () => {
+  const [columns] = useState([
+    { name: 'subject', title: 'Subject' },
+    { name: 'startDate', title: 'Start Date' },
+    { name: 'dueDate', title: 'Due Date' },
+    { name: 'priority', title: 'Priority' },
+  ]);
+  const [rows] = useState(generateRows({
+    columnValues: employeeTaskValues,
+    length: 8,
+  }));
+  const [integratedSortingColumnExtensions] = useState([
+    { columnName: 'priority', compare: comparePriority },
+  ]);
+  const [tableColumnExtensions] = useState([
+    { columnName: 'subject', width: 300 },
+  ]);
+
+  return (
+    <<%&wrapperTag%><%&wrapperAttributes%>>
+      <Grid
+        rows={rows}
+        columns={columns}
+      >
+        <SortingState />
+        <IntegratedSorting
+          columnExtensions={integratedSortingColumnExtensions}
+        />
+        <Table
+          columnExtensions={tableColumnExtensions}
+        />
+        <TableHeaderRow showSortingControls />
+      </Grid>
+    </<%&wrapperTag%>>
+  );
+};

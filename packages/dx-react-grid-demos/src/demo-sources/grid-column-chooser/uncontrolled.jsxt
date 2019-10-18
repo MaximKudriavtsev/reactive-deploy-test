@@ -1,0 +1,39 @@
+import React, { useState } from 'react';<%&additionalImports%>
+import {
+  Grid,
+  Table,
+  TableHeaderRow,
+  ColumnChooser,
+  TableColumnVisibility,
+  Toolbar,
+} from '@devexpress/dx-react-grid-<%&themeName%>';
+
+import { generateRows } from '../../../demo-data/generator';
+
+export default () => {
+  const [columns] = useState([
+    { name: 'name', title: 'Name' },
+    { name: 'gender', title: 'Gender' },
+    { name: 'city', title: 'City' },
+    { name: 'car', title: 'Car' },
+  ]);
+  const [rows] = useState(generateRows({ length: 6 }));
+  const [defaultHiddenColumnNames] = useState(['gender', 'car']);
+
+  return (
+    <<%&wrapperTag%><%&wrapperAttributes%>>
+      <Grid
+        rows={rows}
+        columns={columns}
+      >
+        <Table />
+        <TableHeaderRow />
+        <TableColumnVisibility
+          defaultHiddenColumnNames={defaultHiddenColumnNames}
+        />
+        <Toolbar />
+        <ColumnChooser />
+      </Grid>
+    </<%&wrapperTag%>>
+  );
+};

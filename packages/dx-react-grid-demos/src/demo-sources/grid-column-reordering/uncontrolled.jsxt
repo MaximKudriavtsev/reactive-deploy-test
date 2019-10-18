@@ -1,0 +1,41 @@
+import React, { useState } from 'react';<%&additionalImports%>
+import {
+  Grid,
+  DragDropProvider,
+  Table,
+  TableHeaderRow,
+  TableColumnReordering,
+} from '@devexpress/dx-react-grid-<%&themeName%>';
+
+import { generateRows } from '../../../demo-data/generator';
+
+export default () => {
+  const [columns] = useState([
+    { name: 'name', title: 'Name' },
+    { name: 'gender', title: 'Gender' },
+    { name: 'city', title: 'City' },
+    { name: 'car', title: 'Car' },
+  ]);
+  const [rows] = useState(generateRows({ length: 6 }));
+  const [tableColumnExtensions] = useState([
+    { columnName: 'gender', width: 100 },
+  ]);
+
+  return (
+    <<%&wrapperTag%><%&wrapperAttributes%>>
+      <Grid
+        rows={rows}
+        columns={columns}
+      >
+        <DragDropProvider />
+        <Table
+          columnExtensions={tableColumnExtensions}
+        />
+        <TableColumnReordering
+          defaultOrder={['city', 'gender', 'car', 'name']}
+        />
+        <TableHeaderRow />
+      </Grid>
+    </<%&wrapperTag%>>
+  );
+};
