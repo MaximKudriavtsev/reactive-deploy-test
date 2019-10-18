@@ -49,7 +49,7 @@
     "build:site:docs": "gulp site",
     "build:site:watch": "npx nodemon --exec \"yarn build:site:docs\" --watch \"packages/dx-react-grid-demos/dist/\" --watch \"packages/dx-react-chart-demos/dist/\" --watch \"packages/dx-react-scheduler-demos/dist/\" --watch \"packages/*/docs/\" --watch \"packages/*/demos/\" --watch \"gulpfile.js\" --ext md,js",
     "deploy": "yarn build:site:docs && yarn deploy:start",
-    "deploy:start": "cd site && bundle install && jekyll build",
+    "deploy:start": "cd site && bundle install && jekyll build --config _config.yml,_config-deploy.yml",
     "lint": "lerna run lint --ignore @devexpress/dx-vue-*",
     "lint:ci": "lerna run lint:ci",
     "test": "lerna run test --ignore @devexpress/dx-vue-* && yarn test:bs4",
