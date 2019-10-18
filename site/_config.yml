@@ -1,5 +1,5 @@
 title: DevExtreme Reactive Components
-baseurl: "/devextreme-reactive"
+# baseurl: "/devextreme-reactive"
 version: "X.X.X"
 
 url: "https://devexpress.github.io" # used for configure sitemap
