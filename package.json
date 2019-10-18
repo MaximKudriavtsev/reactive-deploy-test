@@ -68,8 +68,5 @@
   },
   "workspaces": [
     "packages/*"
-  ],
-  "engines": {
-    "yarn": "1.19.1"
-  }
+  ]
 }
