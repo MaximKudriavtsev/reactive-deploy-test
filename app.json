@@ -1,0 +1,17 @@
+{
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ],
+  "env": {
+  },
+  "formation": {
+  },
+  "name": "reactive-deploy-test",
+  "scripts": {
+    "postdeploy": "yarn deploy"
+  },
+  "stack": "heroku-18"
+}
