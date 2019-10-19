@@ -11,7 +11,7 @@
   },
   "name": "reactive-deploy-test",
   "scripts": {
-    "postdeploy": "yarn deploy"
+    "postdeploy": "yarn heroku-deploy"
   },
   "stack": "heroku-18"
 }

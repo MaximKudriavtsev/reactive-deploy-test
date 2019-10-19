@@ -65,7 +65,8 @@
     "publish:site": "yarn && node ./scripts/publish-site.js",
     "update-api": "lerna run update-api",
     "start-demo-servers": "yarn build:generator && lerna run --parallel start-demo-server:prod",
-    "update-deps": "ncu -u && ./node_modules/.bin/lerna exec \"ncu -u\" --ignore @devexpress/dx-vue-*"
+    "update-deps": "ncu -u && ./node_modules/.bin/lerna exec \"ncu -u\" --ignore @devexpress/dx-vue-*",
+    "heroku-deploy": "yarn && yarn deploy"
   },
   "workspaces": [
     "packages/*"
