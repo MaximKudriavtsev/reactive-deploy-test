@@ -69,10 +69,10 @@
     "heroku-deploy": "yarn heroku-start",
     "heroku-start": "gem install --user-install bundler && cd site && bundle install && jekyll build --config _config.yml,_config-deploy.yml"
   },
-  "engines": {
-    "node": "10.x"
-  },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "engines": {
+    "node": "10.x"
+  }
 }
